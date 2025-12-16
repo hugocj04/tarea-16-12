@@ -27,7 +27,10 @@ public class Enrollment {
     private Course course;
 
     private LocalDateTime enrolledAt;
-    private String status;
+
+    @Enumerated(EnumType.STRING)
+    private EnrollmentStatus status;
+
     private int progressPercent;
 
 }

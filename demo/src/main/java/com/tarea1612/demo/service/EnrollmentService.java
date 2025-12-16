@@ -1,11 +1,11 @@
 package com.tarea1612.demo.service;
 
 import com.tarea1612.demo.model.Course;
+import com.tarea1612.demo.model.EnrollmentStatus;
 import com.tarea1612.demo.model.Enrollment;
 import com.tarea1612.demo.model.User;
 import com.tarea1612.demo.repository.CourseRepository;
 import com.tarea1612.demo.repository.EnrollmentRepository;
-import com.tarea1612.demo.repository.LessonRepository;
 import com.tarea1612.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +35,7 @@ public class EnrollmentService {
         enrollment.setUser(user);
         enrollment.setCourse(course);
         enrollment.setEnrolledAt(LocalDateTime.now());
-        enrollment.setStatus("ENROLLED");
+        enrollment.setStatus(EnrollmentStatus.ENROLLED);
         enrollment.setProgressPercent(0);
 
         return enrollmentRepository.save(enrollment);
@@ -45,7 +45,7 @@ public class EnrollmentService {
         Enrollment enrollment = enrollmentRepository.findById(enrollmentId).orElseThrow();
         enrollment.setProgressPercent(progress);
         if (progress == 100) {
-            enrollment.setStatus("COMPLETED");
+            enrollment.setStatus(EnrollmentStatus.COMPLETED);
         }
         enrollmentRepository.save(enrollment);
     }
