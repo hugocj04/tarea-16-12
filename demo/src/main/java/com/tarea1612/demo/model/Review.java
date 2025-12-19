@@ -10,15 +10,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "reviews", uniqueConstraints = {
-        @UniqueConstraint(
-                columnNames = {"user_id", "course_id"},
-                name = "unique_user_course_review")
+        @UniqueConstraint(columnNames = {"user_id", "course_id"})
 })
 public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private int rating;
     private String comment;
 
@@ -29,5 +28,11 @@ public class Review {
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
+
+    public void validateRating() {
+        if (rating < 1 || rating > 5) {
+            throw new IllegalStateException("Rating must be between 1 and 5");
+        }
+    }
 
 }

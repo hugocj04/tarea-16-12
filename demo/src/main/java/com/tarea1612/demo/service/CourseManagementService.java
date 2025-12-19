@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CourseService {
+public class CourseManagementService {
 
     @Autowired
     private CourseRepository courseRepository;
@@ -23,6 +23,7 @@ public class CourseService {
 
     @Autowired
     private EnrollmentRepository enrollmentRepository;
+
     @Autowired
     private LessonRepository lessonRepository;
 
@@ -40,5 +41,10 @@ public class CourseService {
         }
 
         return course;
+    }
+
+    public Course createCourse(String title, String description, Long instructorId) {
+        User instructor = userRepository.findById(instructorId)
+                .orElseThrow(() -> new IllegalArgumentException("Instructor not found"));
     }
 }

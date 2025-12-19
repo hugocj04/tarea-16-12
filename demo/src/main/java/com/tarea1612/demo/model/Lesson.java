@@ -15,9 +15,12 @@ public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
     private String content;
-    private int orderNumber;
+
+    @Column(name = "order_index")
+    private Integer orderNumber;
 
     @ManyToOne
     @JoinColumn(name = "course_id")
